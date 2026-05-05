@@ -20,13 +20,12 @@
         button { background-color: #ff758f; color: white; border: none; padding: 15px 30px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); z-index: 10; margin: 10px; min-width: 200px; }
         .back-btn { background-color: #ffb3c1; margin-top: 20px; min-width: 100px; }
 
-        /* STRICHMÄNNCHEN ANIMATION */
-        #stickmen-container { position: fixed; top: 20px; width: 100%; height: 150px; pointer-events: none; z-index: 500; display: none; justify-content: center; align-items: flex-end; }
-        .stickman { width: 60px; height: 100px; position: absolute; transition: left 3s linear, right 3s linear; }
-        .bubble { position: absolute; top: -40px; background: white; padding: 5px 10px; border-radius: 10px; border: 2px solid #ff758f; font-size: 0.8rem; font-weight: bold; display: none; white-space: nowrap; }
-        .bubble::after { content: '⬇️'; position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); }
+        /* STRICHMÄNNCHEN ANIMATION KORRIGIERT */
+        #stickmen-container { position: fixed; top: 80px; width: 100%; height: 160px; pointer-events: none; z-index: 500; display: none; justify-content: center; align-items: flex-end; }
+        .stickman { width: 60px; height: 100px; position: absolute; transition: left 3s ease-in-out, right 3s ease-in-out; }
+        .bubble { position: absolute; top: -55px; background: white; padding: 8px 12px; border-radius: 15px; border: 2px solid #ff758f; font-size: 0.9rem; font-weight: bold; display: none; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .bubble::after { content: '▼'; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); color: #ff758f; font-size: 12px; }
 
-        /* Restliche Styles wie zuvor */
         .nav-menu { display: grid; grid-template-columns: 1fr; gap: 10px; width: 80%; max-width: 300px; }
         .nav-item { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; font-weight: bold; border: 2px solid transparent; transition: 0.3s; }
         .nav-item:hover { border-color: #ff758f; transform: scale(1.05); }
@@ -171,7 +170,6 @@
         let score = 0;
         let gameActive = false;
 
-        // DYNAMISCHE BEGRÜẞUNG
         const hour = new Date().getHours();
         const gText = document.getElementById('greeting-text');
         if (hour >= 5 && hour < 12) gText.innerText = "good morning, beautiful ❤️";
@@ -179,7 +177,6 @@
         else if (hour >= 18 && hour < 22) gText.innerText = "good evening, my love ❤️";
         else gText.innerText = "sweet dreams, baby 🌙";
 
-        // STRICHMÄNNCHEN LOGIK
         function triggerStickmen() {
             const container = document.getElementById('stickmen-container');
             const boy = document.getElementById('sm-boy');
@@ -202,9 +199,9 @@
                 kiss.innerHTML = '❤️';
                 kiss.style.position = 'absolute';
                 kiss.style.top = '40px';
-                kiss.style.fontSize = '20px';
+                kiss.style.fontSize = '25px';
                 container.appendChild(kiss);
-                setTimeout(() => kiss.remove(), 2000);
+                setTimeout(() => kiss.remove(), 2500);
             }, 3200);
 
             setTimeout(() => {
@@ -212,11 +209,11 @@
                 girl.style.right = '-200px';
                 bubble.style.display = 'none';
                 setTimeout(() => container.style.display = 'none', 3000);
-            }, 7000);
+            }, 8000);
         }
 
-        setInterval(triggerStickmen, 25000); // Alle 25 Sek
-        setTimeout(triggerStickmen, 3000); // Erster Start nach 3 Sek
+        setInterval(triggerStickmen, 30000);
+        setTimeout(triggerStickmen, 3000);
 
         function createHearts() {
             const container = document.getElementById('bg-hearts');
