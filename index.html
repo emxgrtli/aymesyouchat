@@ -29,10 +29,10 @@
         #diary-btn { background: #ff758f; border: 2px solid #fff; border-radius: 15px; padding: 10px 15px; cursor: pointer; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; font-size: 1rem; }
 
         /* FULLSCREEN DIARY PAGE */
-        #screen-diary { background-color: #fff0f3; z-index: 2000; }
-        .diary-container { width: 90%; height: 80vh; background: white; border: 3px solid #ff758f; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        #screen-diary { background-color: #fff0f3; z-index: 2000; justify-content: flex-start; padding-top: 40px; }
+        .diary-container { width: 90%; height: 70vh; background: white; border: 3px solid #ff758f; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
         #diary-frame { width: 100%; height: 100%; border: none; }
-        .back-btn { margin-top: 20px; background-color: #ffb3c1; font-size: 1rem; padding: 10px 20px; }
+        .back-btn { margin-top: 15px; background-color: #ff4d6d; font-size: 1.1rem; padding: 12px 25px; font-weight: bold; position: relative; z-index: 2001; }
 
         #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1rem; color: #ff758f; z-index: 100; background: rgba(255, 240, 243, 0.9); padding: 5px 0; }
     </style>
@@ -40,18 +40,15 @@
 <body>
     <div class="bg-hearts" id="bg-hearts"></div>
 
-    <!-- Floating Diary Button (Always visible unless diary is open) -->
     <div id="diary-trigger">
         <button id="diary-btn" onclick="openDiary()">📖 Our Diary</button>
     </div>
 
-    <!-- START SCREEN -->
     <div class="screen active" id="screen-start">
         <h1>this is for rosana ❤️</h1>
         <button onclick="nextScreen('screen-q1')">Start</button>
     </div>
 
-    <!-- Q1 SCREEN -->
     <div class="screen" id="screen-q1">
         <h2>do you like me?</h2>
         <div style="position:relative; height:100px; width:100%;">
@@ -60,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Q2 SCREEN -->
     <div class="screen" id="screen-q2">
         <h2>on a scale from 1-10...</h2>
         <div id="scale-grid" style="display:grid; grid-template-columns: repeat(5,1fr); gap:10px;"></div>
@@ -70,7 +66,6 @@
         </div>
     </div>
 
-    <!-- QUIZ SCREEN -->
     <div class="screen" id="screen-quiz">
         <h2>whats the first thing you will cook me?</h2>
         <div id="quiz-box" style="display:flex; flex-direction:column;">
@@ -84,7 +79,6 @@
         </div>
     </div>
 
-    <!-- JAR SCREEN -->
     <div class="screen" id="screen-jar">
         <h2>Reasons why I like you...</h2>
         <div id="jar" style="cursor:pointer; font-size: 80px;">🫙</div>
@@ -92,7 +86,6 @@
         <button id="jar-next" style="display:none;" onclick="nextScreen('screen-final')">Final Surprise</button>
     </div>
 
-    <!-- FINAL SCREEN -->
     <div class="screen" id="screen-final">
         <h1>ay mes you</h1>
         <div class="album">
@@ -103,13 +96,13 @@
         <h2>See you soon!</h2>
     </div>
 
-    <!-- FULL DIARY PAGE (Hidden by default) -->
+    <!-- DIARY PAGE WITH NEW TITLE -->
     <div class="screen" id="screen-diary">
-        <h1>Our Diary</h1>
+        <h1 style="font-size: 2.2rem;">write me a message! <3</h1>
         <div class="diary-container">
             <iframe id="diary-frame" src="https://padlet.com/embed/i2nh0yql9escahmo" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
         </div>
-        <button class="back-btn" onclick="closeDiary()">← Back to App</button>
+        <button class="back-btn" onclick="closeDiary()">← Back</button>
     </div>
 
     <div id="countdown">Loading...</div>
@@ -128,19 +121,23 @@
         createHearts();
 
         function nextScreen(id) {
+            // Wir merken uns nur Screens, die NICHT das Diary selbst sind
+            if(id !== 'screen-diary') {
+                lastScreenId = id;
+            }
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            lastScreenId = id; // Speichert den aktuellen Screen, um zurückzukehren
         }
 
-        // Diary Toggle Logic
         function openDiary() {
-            document.getElementById('diary-trigger').style.display = 'none';
+            document.getElementById('diary-trigger').style.opacity = '0';
+            document.getElementById('diary-trigger').style.pointerEvents = 'none';
             nextScreen('screen-diary');
         }
 
         function closeDiary() {
-            document.getElementById('diary-trigger').style.display = 'block';
+            document.getElementById('diary-trigger').style.opacity = '1';
+            document.getElementById('diary-trigger').style.pointerEvents = 'auto';
             nextScreen(lastScreenId);
         }
 
