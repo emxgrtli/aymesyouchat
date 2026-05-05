@@ -13,12 +13,10 @@
             background-color: #fff0f3; color: #ff4d6d; 
         }
 
-        /* Background Hearts */
         .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         .heart { position: absolute; color: #ffb3c1; font-size: 20px; animation: fall linear infinite; opacity: 0.7; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
 
-        /* Screens */
         .screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100%; text-align: center; padding: 20px; box-sizing: border-box; }
         .screen.active { display: flex; }
         h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 20px; }
@@ -30,38 +28,29 @@
             cursor: pointer; transition: all 0.3s ease; 
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); z-index: 10; margin: 10px; 
         }
-        .fade-out { opacity: 0 !important; pointer-events: none !important; transform: scale(0); }
         
-        /* Reason Jar */
-        #jar { font-size: 100px; cursor: pointer; transition: transform 0.2s; user-select: none; }
-        #jar:active { transform: scale(0.9); }
-        #reason-text { font-size: 1.4rem; font-weight: 600; margin-top: 20px; min-height: 60px; color: #d02090; padding: 0 10px; }
-
         /* Polaroid Album */
         .album { display: flex; justify-content: center; align-items: center; gap: 15px; height: 250px; margin-top: 10px; width: 100%; }
         .polaroid { background: white; padding: 8px 8px 20px 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: juggle 4s ease-in-out infinite; width: 130px; }
         .polaroid img { width: 100%; height: 130px; object-fit: cover; }
-        .p1 { animation-delay: 0s; transform: rotate(-5deg); }
-        .p2 { animation-delay: 0.5s; transform: rotate(0deg); }
-        .p3 { animation-delay: 1s; transform: rotate(5deg); }
         @keyframes juggle { 0%, 100% { transform: translateY(0) rotate(-5deg); } 25% { transform: translateY(-8px) rotate(0deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-4px) rotate(0deg); } }
 
-        /* Diary Styles (FIXED HEIGHT) */
+        /* Diary Styles - FORCED VISIBILITY */
         #diary-box { position: fixed; bottom: 80px; left: 20px; z-index: 1000; width: 320px; max-width: 85vw; }
         #diary-toggle { 
-            background: white; border: 2px solid #ff758f; border-radius: 15px; 
-            padding: 10px; cursor: pointer; color: #ff758f; font-weight: bold; 
+            background: #ff758f; border: 2px solid #fff; border-radius: 15px; 
+            padding: 10px; cursor: pointer; color: white; font-weight: bold; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; 
         }
         #diary-content { 
-            display: none; background: white; border: 2px solid #ff758f; 
+            display: none; background: #ffffff !important; border: 3px solid #ff758f; 
             border-radius: 15px; margin-top: 10px; padding: 10px; 
-            height: 450px; /* Erhöhte Höhe für Sichtbarkeit */
+            height: 400px; min-height: 400px;
             overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
         }
-        #diary-content.open { display: block; }
+        #diary-content.open { display: block !important; }
 
-        #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1rem; color: #ff758f; z-index: 100; background: rgba(255, 240, 243, 0.8); padding: 5px 0; }
+        #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1rem; color: #ff758f; z-index: 100; background: rgba(255, 240, 243, 0.9); padding: 5px 0; }
     </style>
 </head>
 <body>
@@ -69,16 +58,17 @@
 
     <!-- Diary Widget -->
     <div id="diary-box">
-        <div id="diary-toggle" onclick="document.getElementById('diary-content').classList.toggle('open')">📖 Our Diary</div>
+        <div id="diary-toggle" onclick="document.getElementById('diary-content').classList.toggle('open')">📖 Open Our Diary</div>
         <div id="diary-content">
+            <!-- Cusdis Comment Widget -->
             <div id="cusdis_thread"
                  data-host="https://cusdis.com"
                  data-app-id="9434863c-6e65-4f36-9b16-43f119036980"
-                 data-page-id="rosana-diary"
-                 data-page-url="rosana-diary"
-                 data-page-title="Our Diary">
+                 data-page-id="rosana_main_diary"
+                 data-page-url="rosana_main_diary"
+                 data-page-title="Rosana Diary">
             </div>
-            <script async src="https://cusdis.com/js/cusdis.es.js"></script>
+            <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
         </div>
     </div>
 
@@ -111,9 +101,9 @@
     <div class="screen" id="screen-quiz">
         <h2>whats the first thing you will cook me?</h2>
         <div id="quiz-box" style="display:flex; flex-direction:column;">
-            <button onclick="this.classList.add('fade-out')">air sandwiches</button>
-            <button id="correct-quiz" onclick="rightQuiz()">the best pb&j in the world</button>
-            <button onclick="this.classList.add('fade-out')">dry ass chicken</button>
+            <button onclick="this.style.opacity='0'">air sandwiches</button>
+            <button onclick="rightQuiz()">the best pb&j in the world</button>
+            <button onclick="this.style.opacity='0'">dry ass chicken</button>
         </div>
         <div id="quiz-res" style="display:none;">
             <h2>awww baby! i knew it!</h2>
@@ -124,7 +114,7 @@
     <!-- Screen 5: Reasons Jar -->
     <div class="screen" id="screen-jar">
         <h2>Reasons why I like you...</h2>
-        <div id="jar">🫙</div>
+        <div id="jar" style="cursor:pointer;">🫙</div>
         <div id="reason-text">Tap the jar!</div>
         <button id="jar-next" style="display:none;" onclick="nextScreen('screen-final')">Final Surprise</button>
     </div>
@@ -140,11 +130,9 @@
         <h2>See you soon!</h2>
     </div>
 
-    <!-- Countdown -->
     <div id="countdown">Loading...</div>
 
     <script>
-        // Hearts Animation
         function createHearts() {
             const container = document.getElementById('bg-hearts');
             for(let i=0; i<25; i++) {
@@ -155,44 +143,33 @@
         }
         createHearts();
 
-        // Navigation
         function nextScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        // Running Button
         function moveNoBtn() {
             const btn = document.getElementById('no-btn');
-            btn.style.position = 'fixed';
             btn.style.left = Math.random()*(window.innerWidth-100)+'px';
             btn.style.top = Math.random()*(window.innerHeight-100)+'px';
         }
 
-        // Scale Buttons
         const grid = document.getElementById('scale-grid');
         for(let i=1; i<=10; i++) {
             const b = document.createElement('button'); b.innerText = i;
             b.onclick = function() {
                 if(i===10) { grid.style.display='none'; document.getElementById('scale-res').style.display='block'; }
-                else { this.classList.add('fade-out'); }
+                else { this.style.opacity='0'; }
             };
             grid.appendChild(b);
         }
 
-        // Quiz Logic
         function rightQuiz() { 
             document.getElementById('quiz-box').style.display='none'; 
             document.getElementById('quiz-res').style.display='block'; 
         }
 
-        // Jar Logic
-        const reasons = [
-            "the way you look at me", "your smile", "the way we kiss", 
-            "the way you touch me", "your laugh", "your hands", 
-            "you getting nervous when i look into your eyes too long", 
-            "the way you hug me", "your voice", "how you always know what im thinking"
-        ];
+        const reasons = ["the way you look at me", "your smile", "the way we kiss", "the way you touch me", "your laugh", "your hands", "you getting nervous when i look into your eyes too long", "the way you hug me", "your voice", "how you always know what im thinking"];
         let reasonIdx = 0;
         document.getElementById('jar').onclick = function() {
             if(reasonIdx < reasons.length) {
@@ -205,15 +182,11 @@
             }
         };
 
-        // Countdown Logic (Target: June 15, 2026, 19:00 EDT / 23:00 UTC)
         const targetDate = new Date("2026-06-15T23:00:00Z").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-            if(diff <= 0) {
-                document.getElementById('countdown').innerText = "I'm with you! ❤️";
-                return;
-            }
+            if(diff <= 0) { document.getElementById('countdown').innerText = "I'm with you! ❤️"; return; }
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
