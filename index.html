@@ -6,38 +6,62 @@
     <title>For Rosana ❤️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap');
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Quicksand', sans-serif; background-color: #fff0f3; color: #ff4d6d; }
+        
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; font-family: 'Quicksand', sans-serif; 
+            background-color: #fff0f3; color: #ff4d6d; 
+        }
+
+        /* Background Hearts */
         .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         .heart { position: absolute; color: #ffb3c1; font-size: 20px; animation: fall linear infinite; opacity: 0.7; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+
+        /* Screens */
         .screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100%; text-align: center; padding: 20px; box-sizing: border-box; }
         .screen.active { display: flex; }
         h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 20px; }
         h2 { font-size: 2rem; margin-bottom: 30px; }
-        button { background-color: #ff758f; color: white; border: none; padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); z-index: 10; margin: 10px; }
+        
+        button { 
+            background-color: #ff758f; color: white; border: none; 
+            padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; 
+            cursor: pointer; transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); z-index: 10; margin: 10px; 
+        }
         .fade-out { opacity: 0 !important; pointer-events: none !important; transform: scale(0); }
         
         /* Reason Jar */
-        #jar { font-size: 100px; cursor: pointer; transition: transform 0.2s; }
+        #jar { font-size: 100px; cursor: pointer; transition: transform 0.2s; user-select: none; }
         #jar:active { transform: scale(0.9); }
-        #reason-text { font-size: 1.5rem; font-weight: 600; margin-top: 20px; min-height: 60px; color: #d02090; }
+        #reason-text { font-size: 1.4rem; font-weight: 600; margin-top: 20px; min-height: 60px; color: #d02090; padding: 0 10px; }
 
-        /* Polaroid Album - Side by Side & Juggle */
-        .album { display: flex; justify-content: center; align-items: center; gap: 20px; height: 280px; margin-top: 10px; width: 100%; }
-        .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: juggle 4s ease-in-out infinite; width: 150px; }
-        .polaroid img { width: 100%; height: 150px; object-fit: cover; }
+        /* Polaroid Album */
+        .album { display: flex; justify-content: center; align-items: center; gap: 15px; height: 250px; margin-top: 10px; width: 100%; }
+        .polaroid { background: white; padding: 8px 8px 20px 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: juggle 4s ease-in-out infinite; width: 130px; }
+        .polaroid img { width: 100%; height: 130px; object-fit: cover; }
         .p1 { animation-delay: 0s; transform: rotate(-5deg); }
         .p2 { animation-delay: 0.5s; transform: rotate(0deg); }
         .p3 { animation-delay: 1s; transform: rotate(5deg); }
-        @keyframes juggle { 0%, 100% { transform: translateY(0) rotate(-5deg); } 25% { transform: translateY(-10px) rotate(0deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-5px) rotate(0deg); } }
+        @keyframes juggle { 0%, 100% { transform: translateY(0) rotate(-5deg); } 25% { transform: translateY(-8px) rotate(0deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-4px) rotate(0deg); } }
 
-        /* Diary Styles */
-        #diary-box { position: fixed; bottom: 80px; left: 20px; z-index: 1000; width: 300px; }
-        #diary-toggle { background: white; border: 2px solid #ff758f; border-radius: 15px; padding: 10px; cursor: pointer; color: #ff758f; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; }
-        #diary-content { display: none; background: white; border: 2px solid #ff758f; border-radius: 15px; margin-top: 10px; padding: 10px; height: 350px; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        /* Diary Styles (FIXED HEIGHT) */
+        #diary-box { position: fixed; bottom: 80px; left: 20px; z-index: 1000; width: 320px; max-width: 85vw; }
+        #diary-toggle { 
+            background: white; border: 2px solid #ff758f; border-radius: 15px; 
+            padding: 10px; cursor: pointer; color: #ff758f; font-weight: bold; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; 
+        }
+        #diary-content { 
+            display: none; background: white; border: 2px solid #ff758f; 
+            border-radius: 15px; margin-top: 10px; padding: 10px; 
+            height: 450px; /* Erhöhte Höhe für Sichtbarkeit */
+            overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+        }
         #diary-content.open { display: block; }
 
-        #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1.1rem; color: #ff758f; z-index: 100; }
+        #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1rem; color: #ff758f; z-index: 100; background: rgba(255, 240, 243, 0.8); padding: 5px 0; }
     </style>
 </head>
 <body>
@@ -58,11 +82,13 @@
         </div>
     </div>
 
+    <!-- Screen 1: Start -->
     <div class="screen active" id="screen-start">
         <h1>this is for rosana ❤️</h1>
         <button onclick="nextScreen('screen-q1')">Start</button>
     </div>
 
+    <!-- Screen 2: Yes/No -->
     <div class="screen" id="screen-q1">
         <h2>do you like me?</h2>
         <div style="position:relative; height:100px; width:100%;">
@@ -71,6 +97,7 @@
         </div>
     </div>
 
+    <!-- Screen 3: Scale 1-10 -->
     <div class="screen" id="screen-q2">
         <h2>on a scale from 1-10...</h2>
         <div id="scale-grid" style="display:grid; grid-template-columns: repeat(5,1fr); gap:10px;"></div>
@@ -80,6 +107,7 @@
         </div>
     </div>
 
+    <!-- Screen 4: Quiz -->
     <div class="screen" id="screen-quiz">
         <h2>whats the first thing you will cook me?</h2>
         <div id="quiz-box" style="display:flex; flex-direction:column;">
@@ -93,6 +121,7 @@
         </div>
     </div>
 
+    <!-- Screen 5: Reasons Jar -->
     <div class="screen" id="screen-jar">
         <h2>Reasons why I like you...</h2>
         <div id="jar">🫙</div>
@@ -100,6 +129,7 @@
         <button id="jar-next" style="display:none;" onclick="nextScreen('screen-final')">Final Surprise</button>
     </div>
 
+    <!-- Screen 6: Final -->
     <div class="screen" id="screen-final">
         <h1>ay mes you</h1>
         <div class="album">
@@ -110,9 +140,11 @@
         <h2>See you soon!</h2>
     </div>
 
+    <!-- Countdown -->
     <div id="countdown">Loading...</div>
 
     <script>
+        // Hearts Animation
         function createHearts() {
             const container = document.getElementById('bg-hearts');
             for(let i=0; i<25; i++) {
@@ -123,11 +155,13 @@
         }
         createHearts();
 
+        // Navigation
         function nextScreen(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
+        // Running Button
         function moveNoBtn() {
             const btn = document.getElementById('no-btn');
             btn.style.position = 'fixed';
@@ -135,6 +169,7 @@
             btn.style.top = Math.random()*(window.innerHeight-100)+'px';
         }
 
+        // Scale Buttons
         const grid = document.getElementById('scale-grid');
         for(let i=1; i<=10; i++) {
             const b = document.createElement('button'); b.innerText = i;
@@ -145,22 +180,40 @@
             grid.appendChild(b);
         }
 
-        function rightQuiz() { document.getElementById('quiz-box').style.display='none'; document.getElementById('quiz-res').style.display='block'; }
+        // Quiz Logic
+        function rightQuiz() { 
+            document.getElementById('quiz-box').style.display='none'; 
+            document.getElementById('quiz-res').style.display='block'; 
+        }
 
-        const reasons = ["the way you look at me", "your smile", "the way we kiss", "the way you touch me", "your laugh", "your hands", "you getting nervous when i look into your eyes too long", "the way you hug me", "your voice", "how you always know what im thinking"];
+        // Jar Logic
+        const reasons = [
+            "the way you look at me", "your smile", "the way we kiss", 
+            "the way you touch me", "your laugh", "your hands", 
+            "you getting nervous when i look into your eyes too long", 
+            "the way you hug me", "your voice", "how you always know what im thinking"
+        ];
         let reasonIdx = 0;
         document.getElementById('jar').onclick = function() {
             if(reasonIdx < reasons.length) {
                 document.getElementById('reason-text').innerText = reasons[reasonIdx];
                 reasonIdx++;
-                if(reasonIdx === reasons.length) { document.getElementById('jar-next').style.display = 'inline-block'; this.innerHTML = '🏺✨'; }
+                if(reasonIdx === reasons.length) { 
+                    document.getElementById('jar-next').style.display = 'inline-block'; 
+                    this.innerHTML = '🏺✨'; 
+                }
             }
         };
 
+        // Countdown Logic (Target: June 15, 2026, 19:00 EDT / 23:00 UTC)
         const targetDate = new Date("2026-06-15T23:00:00Z").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
+            if(diff <= 0) {
+                document.getElementById('countdown').innerText = "I'm with you! ❤️";
+                return;
+            }
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
