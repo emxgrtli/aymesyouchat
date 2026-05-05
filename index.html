@@ -26,12 +26,10 @@
         .bubble { position: absolute; top: -55px; background: white; padding: 8px 12px; border-radius: 15px; border: 2px solid #ff758f; font-size: 0.9rem; font-weight: bold; display: none; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .bubble::after { content: '▼'; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); color: #ff758f; font-size: 12px; }
 
-        /* ANIMATIONEN */
         @keyframes dance { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .dancing { animation: dance 0.5s infinite; }
         .phone-line { position: absolute; top: 110px; border-top: 2px dashed #ff758f; width: 60%; display: none; z-index: 499; }
 
-        /* Nav & Rest */
         .nav-menu { display: grid; grid-template-columns: 1fr; gap: 10px; width: 80%; max-width: 300px; }
         .nav-item { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; font-weight: bold; border: 2px solid transparent; transition: 0.3s; }
         .nav-item:hover { border-color: #ff758f; transform: scale(1.05); }
@@ -56,10 +54,10 @@
     <div class="bg-hearts" id="bg-hearts"></div>
 
     <div id="stickmen-container">
-        <div id="sm-boy" class="stickman" style="left: -100px;">
+        <div id="sm-boy" class="stickman" style="left: -150px;">
             <svg viewBox="0 0 100 150"><circle cx="50" cy="30" r="15" fill="none" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="45" x2="50" y2="100" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="60" x2="20" y2="40" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="60" x2="80" y2="40" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="100" x2="30" y2="140" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="100" x2="70" y2="140" stroke="#ff4d6d" stroke-width="4"/></svg>
         </div>
-        <div id="sm-girl" class="stickman" style="right: -100px;">
+        <div id="sm-girl" class="stickman" style="right: -150px;">
             <svg viewBox="0 0 100 150"><circle cx="50" cy="30" r="15" fill="none" stroke="#ff4d6d" stroke-width="4"/><path d="M35 30 L50 10 L65 30" fill="none" stroke="#ff4d6d" stroke-width="3"/><line x1="50" y1="45" x2="50" y2="100" stroke="#ff4d6d" stroke-width="4"/><path d="M50 60 L20 100 L80 100 Z" fill="#ffb3c1"/><line x1="50" y1="100" x2="35" y2="140" stroke="#ff4d6d" stroke-width="4"/><line x1="50" y1="100" x2="65" y2="140" stroke="#ff4d6d" stroke-width="4"/></svg>
         </div>
         <div id="text-bubble" class="bubble">this u and me fr</div>
@@ -68,7 +66,6 @@
 
     <div id="diary-trigger"><button id="diary-btn" onclick="openDiary()">📖 Our Diary</button></div>
 
-    <!-- SCREENS -->
     <div class="screen active" id="screen-start">
         <h1 id="greeting-text">hi rosana ❤️</h1>
         <button onclick="nextScreen('screen-nav')">Start Now</button>
@@ -94,9 +91,9 @@
 
     <div class="screen" id="screen-q1">
         <h2>do you like me?</h2>
-        <div style="position:relative; height:100px; width:100%;">
-            <button onclick="nextScreen('screen-q2')">Yes</button>
-            <button id="no-btn" onmouseover="moveNoBtn()" style="position:absolute; background-color:#ffb3c1; left: 55%; min-width: 80px;">No</button>
+        <div style="position:relative; height:120px; width:100%; max-width: 400px;">
+            <button onclick="nextScreen('screen-q2')" style="position:absolute; left: 10%; top: 20px;">Yes</button>
+            <button id="no-btn" onmouseover="moveNoBtn()" onclick="moveNoBtn()" style="position:absolute; background-color:#ffb3c1; left: 60%; top: 20px; min-width: 100px;">No</button>
         </div>
     </div>
 
@@ -150,9 +147,9 @@
     <div class="screen" id="screen-final">
         <h1>ay mes you</h1>
         <div class="album">
-            <div class="polaroid p1"><img src="foto1.jpg" alt="❤️"></div>
-            <div class="polaroid p2"><img src="foto2.jpg" alt="❤️"></div>
-            <div class="polaroid p3"><img src="foto3.jpg" alt="❤️"></div>
+            <div class="polaroid p1"><img src="foto1.jpg" alt="❤️" style="width:100px; height:120px; object-fit:cover;"></div>
+            <div class="polaroid p2"><img src="foto2.jpg" alt="❤️" style="width:100px; height:120px; object-fit:cover;"></div>
+            <div class="polaroid p3"><img src="foto3.jpg" alt="❤️" style="width:100px; height:120px; object-fit:cover;"></div>
         </div>
         <button class="back-btn" onclick="nextScreen('screen-nav')">Back to Menu</button>
     </div>
@@ -176,19 +173,14 @@
         else if (hour >= 18 && hour < 22) gText.innerText = "good evening, my love ❤️";
         else gText.innerText = "sweet dreams, baby 🌙";
 
-        // ANIMATION: EINMALIGER START
         function triggerStartAnimation() {
             const container = document.getElementById('stickmen-container');
             const boy = document.getElementById('sm-boy');
             const girl = document.getElementById('sm-girl');
             const bubble = document.getElementById('text-bubble');
-
             container.style.display = 'flex';
-            boy.style.transition = 'left 3s ease-in-out';
-            girl.style.transition = 'right 3s ease-in-out';
             boy.style.left = 'calc(50% - 75px)';
             girl.style.right = 'calc(50% - 75px)';
-
             setTimeout(() => {
                 bubble.style.display = 'block';
                 const kiss = document.createElement('div');
@@ -196,7 +188,6 @@
                 container.appendChild(kiss);
                 setTimeout(() => kiss.remove(), 2500);
             }, 3200);
-
             setTimeout(() => {
                 boy.style.left = '-200px'; girl.style.right = '-200px'; bubble.style.display = 'none';
                 setTimeout(() => { container.style.display = 'none'; }, 3000);
@@ -205,31 +196,31 @@
 
         window.onload = () => { createHearts(); setTimeout(triggerStartAnimation, 2000); };
 
+        function moveNoBtn() {
+            const b = document.getElementById('no-btn');
+            b.style.left = Math.random() * 70 + '%';
+            b.style.top = Math.random() * 70 + 'px';
+        }
+
         function nextScreen(id) {
             resetStickmen();
             if(id !== 'screen-diary') lastScreenId = id;
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             if(id === 'screen-worlds') {
-                const c = document.getElementById('stickmen-container');
-                c.style.display = 'flex';
+                document.getElementById('stickmen-container').style.display = 'flex';
                 document.getElementById('phone-line').style.display = 'block';
-                const b = document.getElementById('sm-boy'); const g = document.getElementById('sm-girl');
-                b.style.transition = 'all 1s'; g.style.transition = 'all 1s';
-                b.style.left = '15%'; g.style.right = '15%';
+                document.getElementById('sm-boy').style.left = '15%';
+                document.getElementById('sm-girl').style.right = '15%';
             }
             if(id === 'screen-game') {
-                const c = document.getElementById('stickmen-container');
-                c.style.display = 'flex';
-                const b = document.getElementById('sm-boy');
-                b.style.left = '5%'; b.style.transition = 'all 1s';
+                document.getElementById('stickmen-container').style.display = 'flex';
+                document.getElementById('sm-boy').style.left = '5%';
             }
         }
 
         function resetStickmen() {
-            const container = document.getElementById('stickmen-container');
-            container.style.display = 'none';
+            document.getElementById('stickmen-container').style.display = 'none';
             document.getElementById('phone-line').style.display = 'none';
             document.getElementById('text-bubble').style.display = 'none';
             const b = document.getElementById('sm-boy'); const g = document.getElementById('sm-girl');
@@ -243,11 +234,8 @@
             if(gameActive) return;
             gameActive = true; score = 0; document.getElementById('score').innerText = score;
             let timer = setInterval(() => {
-                // Stickman Throw Move
                 const b = document.getElementById('sm-boy');
-                b.style.transform = 'rotate(-20deg)';
-                setTimeout(() => b.style.transform = 'rotate(0deg)', 200);
-
+                b.style.transform = 'rotate(-20deg)'; setTimeout(() => b.style.transform = 'rotate(0deg)', 200);
                 const k = document.createElement('div'); k.className='game-target'; k.innerHTML='💋';
                 k.style.left = Math.random()*80+'%'; k.style.top = Math.random()*80+'%';
                 k.onclick = () => { score++; document.getElementById('score').innerText = score; k.remove(); };
@@ -264,28 +252,19 @@
         }
 
         function showDance() {
-            const c = document.getElementById('stickmen-container');
-            c.style.display = 'flex';
+            document.getElementById('stickmen-container').style.display = 'flex';
             const b = document.getElementById('sm-boy'); const g = document.getElementById('sm-girl');
             b.style.left = '35%'; g.style.right = '35%';
             setTimeout(() => { b.classList.add('dancing'); g.classList.add('dancing'); }, 1000);
         }
 
-        // Quiz Scale Logic
         const grid = document.getElementById('scale-grid');
         for(let i=1; i<=10; i++) {
             const b = document.createElement('button'); b.innerText = i; b.style.minWidth="40px";
-            b.onclick = () => { 
-                if(i===10) { 
-                    grid.style.display='none'; 
-                    document.getElementById('scale-res').style.display='block'; 
-                    showDance();
-                } else b.style.opacity='0'; 
-            };
+            b.onclick = () => { if(i===10) { grid.style.display='none'; document.getElementById('scale-res').style.display='block'; showDance(); } else b.style.opacity='0'; };
             grid.appendChild(b);
         }
 
-        // Clock & General Logic
         function updateClocks() {
             const now = new Date();
             document.getElementById('time-de').innerText = now.toLocaleTimeString('de-DE', {hour:'2-digit', minute:'2-digit', timeZone:'Europe/Berlin'});
