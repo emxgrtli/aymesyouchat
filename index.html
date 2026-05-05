@@ -24,12 +24,12 @@
         .polaroid img { width: 100%; height: 130px; object-fit: cover; }
         @keyframes juggle { 0%, 100% { transform: translateY(0) rotate(-5deg); } 25% { transform: translateY(-8px) rotate(0deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-4px) rotate(0deg); } }
 
-        /* Diary Styles */
-        #diary-box { position: fixed; bottom: 80px; left: 20px; z-index: 1000; width: 320px; max-width: 85vw; }
+        /* DIARY STYLES WITH PADLET */
+        #diary-box { position: fixed; bottom: 80px; left: 20px; z-index: 1000; width: 350px; max-width: 90vw; }
         #diary-toggle { background: #ff758f; border: 2px solid #fff; border-radius: 15px; padding: 10px; cursor: pointer; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; }
-        #diary-content { display: none; background: white; border: 3px solid #ff758f; border-radius: 15px; margin-top: 10px; padding: 5px; height: 450px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        #diary-content { display: none; background: white; border: 3px solid #ff758f; border-radius: 15px; margin-top: 10px; padding: 5px; height: 450px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); overflow: hidden; }
         #diary-content.open { display: block; }
-        iframe { width: 100%; height: 100%; border: none; }
+        iframe { width: 100%; height: 100%; border: none; border-radius: 10px; }
 
         #countdown { position: fixed; bottom: 20px; width: 100%; text-align: center; font-weight: bold; font-size: 1rem; color: #ff758f; z-index: 100; background: rgba(255, 240, 243, 0.9); padding: 5px 0; }
     </style>
@@ -37,11 +37,11 @@
 <body>
     <div class="bg-hearts" id="bg-hearts"></div>
 
+    <!-- Diary Box with Padlet Embed -->
     <div id="diary-box">
-        <div id="diary-toggle" onclick="document.getElementById('diary-content').classList.toggle('open')">📖 Open Our Diary</div>
+        <div id="diary-toggle" onclick="document.getElementById('diary-content').classList.toggle('open')">📖 Our Diary</div>
         <div id="diary-content">
-            <!-- We load the diary as an iframe directly to bypass script blocks -->
-            <iframe src="https://cusdis.com/widgets/posts/9434863c-6e65-4f36-9b16-43f119036980/rosana_diary_v2"></iframe>
+            <iframe src="https://padlet.com/embed/i2nh0yql9escahmo" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
         </div>
     </div>
 
